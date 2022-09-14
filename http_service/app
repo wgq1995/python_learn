@@ -1,0 +1,23 @@
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+
+def add(a, b):
+    return [a + b]
+
+
+@app.route('/', methods=['POST', 'GET'])
+def index():
+    return render_template("cal.html")
+
+
+@app.route('/test', methods=['POST', 'GET'])
+def login():
+    n1 = request.form.get('num1', type=float)
+    n2 = request.form.get('num2', type=float)
+    print(n1, n2)
+    return add(n1, n2)
+
+
+app.run(debug=True)
